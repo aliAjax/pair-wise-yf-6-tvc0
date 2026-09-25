@@ -26,6 +26,13 @@ button {
   cursor: pointer;
 }
 
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .shell {
   min-height: 100vh;
   padding: 24px;
@@ -91,6 +98,7 @@ h1 {
 }
 
 .panel {
+  align-self: start;
   padding: 18px;
 }
 
@@ -144,6 +152,17 @@ textarea {
   padding: 8px 10px;
 }
 
+.ghost.danger {
+  color: #a4472f;
+}
+
+.link {
+  background: none;
+  color: #b96f45;
+  font-weight: 800;
+  padding: 4px 6px;
+}
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -170,37 +189,26 @@ textarea {
 }
 
 .repair {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: 150px 1fr;
-  min-height: 150px;
   overflow: hidden;
 }
 
-.photo {
-  align-items: center;
-  background: #e4e8df;
-  color: #6a7268;
-  display: flex;
-  font-weight: 800;
-  justify-content: center;
-  min-height: 150px;
-}
-
-.photo img {
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
+.repair.archived {
+  background: #f0f1ec;
 }
 
 .content {
   display: grid;
-  gap: 10px;
-  padding: 14px 14px 14px 0;
+  gap: 12px;
+  padding: 14px;
 }
 
 .content h3 {
   font-size: 1.08rem;
+  margin: 0;
+}
+
+.content h4 {
+  font-size: 0.95rem;
   margin: 0;
 }
 
@@ -209,11 +217,63 @@ textarea {
   margin: 0;
 }
 
+.content .note {
+  font-size: 0.85rem;
+}
+
 .row {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.row.spread,
+.section-head {
+  justify-content: space-between;
+}
+
+.block {
+  border-top: 1px dashed #dde1d9;
+  display: grid;
+  gap: 10px;
+  padding-top: 12px;
+}
+
+.ledger {
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  width: 100%;
+}
+
+.ledger th,
+.ledger td {
+  border-bottom: 1px solid #eef1eb;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.ledger th {
+  color: #687166;
+  font-size: 0.78rem;
+}
+
+.advance-form {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 110px 1.4fr auto;
+}
+
+.settle-form {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr auto;
+}
+
+.hint {
+  color: #828a80;
+  font-size: 0.8rem;
+  margin: 0;
 }
 
 .chip,
@@ -228,6 +288,16 @@ textarea {
 .chip {
   background: #eef1eb;
   color: #596257;
+}
+
+.chip.warn {
+  background: #f2c5b2;
+  color: #813d2a;
+}
+
+.chip.back {
+  background: #dde8f2;
+  color: #315674;
 }
 
 .priority.high {
@@ -260,10 +330,29 @@ textarea {
   color: #376336;
 }
 
+.status.settled {
+  background: #526d4e;
+  color: white;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.actions select {
+  width: auto;
+}
+
+.history {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.history > .seg {
+  justify-self: start;
 }
 
 .empty {
@@ -273,6 +362,11 @@ textarea {
   min-height: 200px;
   justify-content: center;
   text-align: center;
+}
+
+.empty.small {
+  min-height: 0;
+  padding: 8px 0;
 }
 
 @media (max-width: 900px) {
@@ -292,11 +386,8 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .repair {
+  .advance-form,
+  .settle-form {
     grid-template-columns: 1fr;
-  }
-
-  .content {
-    padding: 14px;
   }
 }
